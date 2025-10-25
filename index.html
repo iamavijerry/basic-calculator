@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Calculator</title>
+</head>
+
+<body>
+
+  <!-- 5l, 5m, 5n, 5o, 5p, 5q, 5r.  -->
+
+  <div class="container">
+    <div id="history"></div>
+
+    <input type="text" id="display" placeholder="0">
+
+    <div class="calculaterBtn">
+      <button onclick="calculationfun('AC')">AC</button>
+      <button onclick="calculationfun('%')">%</button>
+      <button onclick="calculationfun('C')">C</button>
+      <button onclick="calculationfun('/')">÷</button>
+      <button class="num" onclick="calculationfun('1')">1</button>
+      <button class="num" onclick="calculationfun('2')">2</button>
+      <button class="num" onclick="calculationfun('3')">3</button>
+      <button onclick="calculationfun('*')">×</button>
+
+      <button class="num" onclick="calculationfun('4')">4</button>
+      <button class="num" onclick="calculationfun('5')">5</button>
+      <button class="num" onclick="calculationfun('6')">6</button>
+      <button onclick="calculationfun('-')">-</button>
+
+      <button class="num" onclick="calculationfun('7')">7</button>
+      <button class="num" onclick="calculationfun('8')">8</button>
+      <button class="num" onclick="calculationfun('9')">9</button>
+      <button onclick="calculationfun('+')">+</button>
+
+      <button class="num" onclick="calculationfun('00')">00</button>
+      <button class="num" onclick="calculationfun('0')">0</button>
+      <button class="num" onclick="calculationfun('.')">.</button>
+      <button class="operator" onclick="calculationfun('=')">=</button>
+    </div>
+  </div>
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
