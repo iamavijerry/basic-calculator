@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      background: #050505;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 310px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+
+    #history {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 10px;
+      text-align: right;
+      width: 100%;
+      min-height: 20px;
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid #353535;
+      outline: none;
+      width: 100%;
+      background: none;
+      color: #fff;
+      padding: 4px 4px 0 4px;
+      margin-bottom: 15px;
+      font-size: 35px;
+      text-align: right;
+    }
+
+    button {
+      border: none;
+      height: 70px;
+      width: 70px;
+      border-radius: 50%;
+      background: #202020;
+      color: #fff;
+      font-size: 1.4rem;
+      transition: 0.1s ease-out;
+      cursor: pointer;
+    }
+
+    button:active {
+      background: #353535;
+      height: 65px;
+      width: 65px;
+      border-radius: 50%;
+      transform: translateX(5px);
+      font-size: 1.2rem;
+    }
+
+    .calculaterBtn {
+      display: grid;
+      grid-template-columns: 70px 70px 70px 70px;
+      gap: 9px;
+    }
+
+    .num {
+      background: #303030;
+    }
+
+    .operator {
+      background: #ff8400;
+      font-size: 2.3rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 5l, 5m, 5n, 5o, 5p, 5q, 5r.  -->
+
+  <div class="container">
+    <div id="history"></div>
+
+    <input type="text" id="display" placeholder="0">
+
+    <div class="calculaterBtn">
+      <button onclick="calculationfun('AC')">AC</button>
+      <button onclick="calculationfun('%')">%</button>
+      <button onclick="calculationfun('C')">C</button>
+      <button onclick="calculationfun('/')">÷</button>
+      <button class="num" onclick="calculationfun('1')">1</button>
+      <button class="num" onclick="calculationfun('2')">2</button>
+      <button class="num" onclick="calculationfun('3')">3</button>
+      <button onclick="calculationfun('*')">×</button>
+
+      <button class="num" onclick="calculationfun('4')">4</button>
+      <button class="num" onclick="calculationfun('5')">5</button>
+      <button class="num" onclick="calculationfun('6')">6</button>
+      <button onclick="calculationfun('-')">-</button>
+
+      <button class="num" onclick="calculationfun('7')">7</button>
+      <button class="num" onclick="calculationfun('8')">8</button>
+      <button class="num" onclick="calculationfun('9')">9</button>
+      <button onclick="calculationfun('+')">+</button>
+
+      <button class="num" onclick="calculationfun('00')">00</button>
+      <button class="num" onclick="calculationfun('0')">0</button>
+      <button class="num" onclick="calculationfun('.')">.</button>
+      <button class="operator" onclick="calculationfun('=')">=</button>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <script>
+    let calculation = '';
+    let result = '';
+    let history = [];
+
+    const historyDiv = document.querySelector('#history');
+    const display = document.querySelector('#display');
+
+    display.focus();
+
+
+    function calculationfun(value) {
+
+      if (value === 'AC') {
+        calculation = '';
+      } else if (value === 'C') {
+        calculation = calculation.slice(0, -1);
+      }
+      else if (value === '=') {
+
+        try {
+          let expression = calculation.replace(/÷/g, "/").replace(/×/g, "*").replace(/%/g, "/100");
+          let result = eval(expression);
+          history.push(calculation + " = " + result);
+          calculation = result.toString();
+          historyDiv.innerHTML = history.join('<br>');
+        }
+
+        catch {
+          calculation = "Error";
+        }
+
+      } else {
+        calculation += value;
+      }
+      display.value = calculation;
+      console.log(calculation);
+    }
+
+    display.addEventListener("keydown", (e) => {
+      e.preventDefault();
+      console.log("Pressed", e.key);
+
+      if (e.key === "=" || e.key === "Enter") {
+        calculationfun('=');
+      } else if (/[0-9+\-*/.]/.test(e.key)) {
+        calculationfun(e.key);
+      } else if (e.key === "Backspace") {
+        calculationfun('C')
+      } else if (e.key === "Delete") {
+        calculationfun('AC');
+      } else if (e.key === "+") {
+        calculationfun('+');
+      } else if (e.key === "-") {
+        calculationfun('-');
+      } else if (e.key === "*") {
+        calculationfun('*');
+      } else if (e.key === "/") {
+        calculationfun('/');
+      } else if (e.key === "%") {
+        calculationfun('%');
+      } else if (e.key === ".") {
+        calculationfun('.');
+      }
+    })
+
+    // function updateHistory() {
+    //   historyDiv.innerHTML = history.join('<br>');
+    // }
+
+
+
+  </script>
+</body>
+
+</html>
